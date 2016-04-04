@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resources :lawyers, except: [:new, :edit, :destroy] do
+      resources :lawyers, except: [:new, :edit] do
         resources :cases, controller: 'lawyers/cases', except: [:new, :edit, :destroy, :show]
       end
       resources :cases, only: [:show]

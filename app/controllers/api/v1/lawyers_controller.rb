@@ -30,6 +30,16 @@ module Api
           render json: { error: 'Parámetros incorrectos'}, status: :unprocessable_entity
         end
       end
+
+      def destroy
+        @lawyer = Lawyer.find_by_id(params[:id])
+        if not @lawyer.nil?
+          @lawyer.destroy
+          render "show.json.rabl", status: :no_content
+        else
+          render json: { error: 'El abogado no existe'}, status: :bad_request
+        end
+      end
       private
       def lawyer_params
         params.require(:lawyer).permit(:name, :specialty, :title, :age)
